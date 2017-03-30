@@ -1,4 +1,4 @@
-#k3po-exec.js
+# k3po-exec.js
 
 Starts K3PO driver via node
 
