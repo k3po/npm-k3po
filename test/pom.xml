@@ -8,7 +8,7 @@
   <artifactId>nukleus-http2-test</artifactId>
   <packaging>pom</packaging>
   <version>develop-SNAPSHOT</version>
-  <name>Runs K3PO with dependencies for HTTP 2 Spec</name>
+  <name>Sample K3po Config</name>
 
   <build>
     <plugins>
