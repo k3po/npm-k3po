@@ -1,16 +1,13 @@
-const spawn = require('child_process').spawn;
-var fs = require('fs');
-var readline = require('readline');
-var mkdirp = require('mkdirp');
-var getDirName = require('path').dirname;
+var spawn = require('child_process').spawn,
+    fs = require('fs'),
+    readline = require('readline'),
+    mkdirp = require('mkdirp'),
+    getDirName = require('path').dirname,
+    argv = require('minimist')(process.argv.slice(2));
 
-var argv = require('minimist')(process.argv.slice(2));
-var config = argv["pom"];
-var pidFile = argv["pidFile"];
-var outputFile = argv["log"];
-
-var mvn = 'mvn';
-var successline = "K3PO started";
+var config = argv.pom,
+    pidFile = argv.pidFile,
+    outputFile = argv.log;
 
 // Kill by pid if pid file exists
 if (fs.existsSync(pidFile)) {
@@ -30,17 +27,14 @@ if (fs.existsSync(pidFile)) {
     });
 }
 
-// console.log(argv);
-// console.log();
-
 // We always stop it, so haven't formalized stop command, instead all we do is check
 // if asked to start
-if (argv["_"][0] === 'start') {
+if (argv._[0] === 'start') {
 
     if (fs.existsSync(outputFile)) {
         // remove outputFile if exists
         fs.unlinkSync(outputFile);
-    }else{
+    } else {
         // create directories if needed
         mkdirp(getDirName(outputFile));
     }
@@ -48,7 +42,7 @@ if (argv["_"][0] === 'start') {
     console.log("Starting K3PO via mvn " + config);
 
     var out = fs.createWriteStream(outputFile);
-    const child = spawn(mvn,
+    var child = spawn("mvn",
         ['k3po:start', '-Dmaven.k3po.daemon=false', '-f', config]
     );
 
@@ -61,7 +55,7 @@ if (argv["_"][0] === 'start') {
     // wait for success line
     child.stdout.on('data', function (data) {
         process.stdout.write(" " + data);
-        if (data.indexOf(successline) > -1) {
+        if (data.indexOf("K3PO started") > -1) {
             console.log("Started K3PO");
             child.stdout.pipe(out);
             child.stdin.pipe(out);
