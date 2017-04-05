@@ -11,3 +11,7 @@ To Stop
 ```
 node k3po-exec.js stop --pidFile ./builds/k3po-test.pid
 ```
+
+### Requirements
+
+This calls mvn under the covers, and Maven must be installed.
