@@ -1,7 +1,15 @@
-language: node_js
-node_js:
-  - "6.10.1"
-addons:
-  apt:
-    packages:
-      - oracle-java8-set-default
+language: java
+
+jdk:
+  - oraclejdk8
+
+env:
+  - NODE_VERSION=6.10.1
+
+install:
+  - nvm install $NODE_VERSION
+  - npm install
+
+script:
+  - nvm use $NODE_VERSION
+  - npm test
