@@ -42,7 +42,7 @@ if (argv._[0] === 'start') {
     console.log("Starting K3PO via mvn " + config);
 
     var out = fs.createWriteStream(outputFile);
-    var child = spawn("mvn",
+    var child = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm',
         ['k3po:start', '-Dmaven.k3po.daemon=false', '-f', config]
     );
 
