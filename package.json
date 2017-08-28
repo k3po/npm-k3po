@@ -1,0 +1,34 @@
+{
+  "name": "k3po-exec",
+  "version": "0.1.0",
+  "description": "start and stop k3po java process from package json",
+  "main": "k3po-exec.js",
+  "scripts": {
+    "lint": "jshint k3po-exec.js",
+    "pretest": "npm run lint && node k3po-exec.js --pom ./test/pom.xml --log ./builds/k3po-test.log --pidFile ./builds/k3po-test.pid start",
+    "test": "echo \"k3po should be running\"",
+    "posttest": "node k3po-exec.js stop --pidFile ./builds/k3po-test.pid"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k3po/k3po-exec.js.git"
+  },
+  "keywords": [
+    "k3po",
+    "javascript",
+    "exec"
+  ],
+  "dependencies": {
+    "minimist": "1.2.0",
+    "mkdirp": "0.5.1"
+  },
+  "devDependencies": {
+    "jshint": "2.9.4"
+  },
+  "author": "k3po developers",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/k3po/k3po-exec.js/issues"
+  },
+  "homepage": "https://github.com/k3po/k3po-exec.js#readme"
+}
